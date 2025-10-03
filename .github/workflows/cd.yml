@@ -1,0 +1,73 @@
+name: 프로메테우스 & 그라파나 CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: 매트릭 수집 및 모니터링 인프라 CD
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: 앱센터 서버에 prometheus.yml 전송
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.APPCENTER_SERVER_IP }}
+          username: ${{ secrets.APPCENTER_SERVER_USERNAME }}
+          password: ${{ secrets.APPCENTER_SERVER_PASSWORD }}
+          port: ${{ secrets.APPCENTER_SERVER_PORT }}
+          source: "prometheus/prometheus.yml"
+          target: "/home/serverking/appcenter-server-metric-monitoring/"
+          strip_components: 0
+
+      - name: 앱센터 서버에 docker-compose.yml 전송
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.APPCENTER_SERVER_IP }}
+          username: ${{ secrets.APPCENTER_SERVER_USERNAME }}
+          password: ${{ secrets.APPCENTER_SERVER_PASSWORD }}
+          port: ${{ secrets.APPCENTER_SERVER_PORT }}
+          source: "docker-compose.yml"
+          target: "/home/serverking/appcenter-server-metric-monitoring/"
+          strip_components: 0
+
+      - name: 앱센터 서버에 그라파나 datasources.yml 전송
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.APPCENTER_SERVER_IP }}
+          username: ${{ secrets.APPCENTER_SERVER_USERNAME }}
+          password: ${{ secrets.APPCENTER_SERVER_PASSWORD }}
+          port: ${{ secrets.APPCENTER_SERVER_PORT }}
+          source: "grafana/**"
+          target: "/home/serverking/appcenter-server-metric-monitoring/"
+          strip_components: 0
+
+      - name: 프로메테우스 리로드 및 그라파나 재시작
+        uses: appleboy/ssh-action@master
+        env:
+          GRAFANA_ADMIN_USER: ${{ secrets.GRAFANA_ADMIN_USER }}
+          GRAFANA_ADMIN_PASSWORD: ${{ secrets.GRAFANA_ADMIN_PASSWORD }}
+        with:
+          host: ${{ secrets.APPCENTER_SERVER_IP }}
+          username: ${{ secrets.APPCENTER_SERVER_USERNAME }}
+          password: ${{ secrets.APPCENTER_SERVER_PASSWORD }}
+          port: ${{ secrets.APPCENTER_SERVER_PORT }}
+          envs: GRAFANA_ADMIN_USER,GRAFANA_ADMIN_PASSWORD
+          script: |
+            cd /home/serverking/appcenter-server-metric-monitoring
+
+            if curl -X POST http://localhost:9090/-/reload 2>/dev/null; then
+              exit 0
+            else
+              docker-compose restart prometheus
+            fi
+
+            GRAFANA_ADMIN_USER="${GRAFANA_ADMIN_USER}"
+            GRAFANA_ADMIN_PASSWORD="${GRAFANA_ADMIN_PASSWORD}"
+            
+            docker-compose up -d grafana
