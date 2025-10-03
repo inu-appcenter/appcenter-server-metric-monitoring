@@ -5,7 +5,7 @@ services:
     image: prom/prometheus:latest
     container_name: appcenter-prometheus
     ports:
-      - "9090:9090"
+      - "9095:9090"
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus-data:/prometheus
@@ -16,13 +16,14 @@ services:
       - '--web.console.libraries=/usr/share/prometheus/console_libraries'
       - '--web.console.templates=/usr/share/prometheus/consoles'
     restart: unless-stopped
-    network_mode: host
+    networks:
+      - monitoring
 
   grafana:
     image: grafana/grafana:latest
     container_name: appcenter-grafana
     ports:
-      - "3000:3000"
+      - "3030:3000"
     volumes:
       - grafana-data:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning
@@ -30,9 +31,17 @@ services:
       - GF_SECURITY_ADMIN_USER=${GRAFANA_ADMIN_USER:-admin}
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-admin}
       - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_SERVER_ROOT_URL=https://monitoring.inuappcenter.kr
+      - GF_SERVER_SERVE_FROM_SUB_PATH=false
     restart: unless-stopped
     depends_on:
       - prometheus
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+    driver: bridge
 
 volumes:
   prometheus-data:
