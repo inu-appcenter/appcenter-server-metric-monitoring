@@ -18,6 +18,8 @@ services:
     restart: unless-stopped
     networks:
       - monitoring
+      - gravit-prod
+      - gravit-dev
 
   grafana:
     image: grafana/grafana:latest
@@ -42,6 +44,12 @@ services:
 networks:
   monitoring:
     driver: bridge
+  gravit-prod:
+    external: true
+    name: prod_gravit-prod
+  gravit-dev:
+    external: true
+    name: dev_gravit-dev
 
 volumes:
   prometheus-data:
