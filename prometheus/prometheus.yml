@@ -11,5 +11,5 @@ scrape_configs:
 
   - job_name: 'inu-portal'
     static_configs:
-      - targets: ['intip.inuappcenter.kr:8086']
+      - targets: ['inu-portal:8086']
     metrics_path: '/actuator/prometheus'
