@@ -68,6 +68,6 @@ jobs:
             fi
 
             echo "GRAFANA_ADMIN_USER=${{ secrets.GRAFANA_ADMIN_USER }}" > .env
-            echo "GRAFANA_ADMIN_PASSWORD=${{ secrets.GRAFANA_ADMIN_PASSWORD }}" > .env
+            echo "GRAFANA_ADMIN_PASSWORD=${{ secrets.GRAFANA_ADMIN_PASSWORD }}" >> .env
             
             docker-compose up -d grafana
