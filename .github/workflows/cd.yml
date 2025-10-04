@@ -67,7 +67,7 @@ jobs:
               docker-compose restart prometheus
             fi
 
-            GRAFANA_ADMIN_USER="${GRAFANA_ADMIN_USER}"
-            GRAFANA_ADMIN_PASSWORD="${GRAFANA_ADMIN_PASSWORD}"
+            echo "GRAFANA_ADMIN_USER=${{ secrets.GRAFANA_ADMIN_USER }}" > .env
+            echo "GRAFANA_ADMIN_PASSWORD=${{ secrets.GRAFANA_ADMIN_PASSWORD }}" > .env
             
             docker-compose up -d grafana
