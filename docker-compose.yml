@@ -20,6 +20,7 @@ services:
       - monitoring
       - gravit-prod
       - gravit-dev
+      - uss-prod
 
   grafana:
     image: grafana/grafana:latest
@@ -40,6 +41,7 @@ services:
       - prometheus
     networks:
       - monitoring
+      - uss-prod
 
 networks:
   monitoring:
@@ -50,6 +52,9 @@ networks:
   gravit-dev:
     external: true
     name: dev_gravit-dev
+  uss-prod:
+    external: true
+    name: uss-prod
 
 volumes:
   prometheus-data:
