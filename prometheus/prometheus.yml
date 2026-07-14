@@ -13,3 +13,8 @@ scrape_configs:
     static_configs:
       - targets: ['172.17.0.1:8086']
     metrics_path: '/actuator/prometheus'
+
+  - job_name: 'uss-prod'
+    static_configs:
+      - targets: ['uss-server-prod:8081']
+    metrics_path: '/actuator/prometheus'
