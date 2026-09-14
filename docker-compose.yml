@@ -42,6 +42,8 @@ services:
     networks:
       - monitoring
       - uss-prod
+      - gravit-prod
+      - gravit-dev
 
 networks:
   monitoring:
