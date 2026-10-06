@@ -14,3 +14,10 @@ datasources:
     access: proxy
     url: http://intip-loki:3100
     editable: true
+
+  - name: Loki-moimi
+    uid: inu-teamflow-loki
+    type: loki
+    access: proxy
+    url: http://inu-teamflow-loki:3100
+    editable: true

@@ -45,6 +45,7 @@ services:
       - uss-prod
       - gravit-prod
       - gravit-dev
+      - inu-teamflow-dev
 
 networks:
   monitoring:
