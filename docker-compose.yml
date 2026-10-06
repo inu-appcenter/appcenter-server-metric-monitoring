@@ -21,7 +21,7 @@ services:
       - gravit-prod
       - gravit-dev
       - uss-prod
-      - inu-teamflow-dev
+      - inu-teamflow
 
   grafana:
     image: grafana/grafana:latest
@@ -45,7 +45,7 @@ services:
       - uss-prod
       - gravit-prod
       - gravit-dev
-      - inu-teamflow-dev
+      - inu-teamflow
 
 networks:
   monitoring:
@@ -59,9 +59,9 @@ networks:
   uss-prod:
     external: true
     name: uss-prod
-  inu-teamflow-dev:
+  inu-teamflow:             # 모이미(moimi) 서비스 네트워크 (dev, prod, Loki 공용)
     external: true
-    name: inu-teamflow-dev
+    name: inu-teamflow
 
 volumes:
   prometheus-data:

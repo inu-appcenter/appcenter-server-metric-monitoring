@@ -29,3 +29,9 @@ scrape_configs:
     static_configs:
       - targets: ['inu-teamflow-dev:8081']
     metrics_path: '/actuator/prometheus'
+
+  - job_name: 'moimi-prod'
+    scrape_interval: 15s
+    static_configs:
+      - targets: ['inu-teamflow-prod:8081']
+    metrics_path: '/actuator/prometheus'
