@@ -8,3 +8,9 @@ datasources:
     url: http://appcenter-prometheus:9090
     isDefault: true
     editable: true
+
+  - name: Loki-intip
+    type: loki
+    access: proxy
+    url: http://intip-loki:3100
+    editable: true

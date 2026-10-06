@@ -14,7 +14,17 @@ scrape_configs:
       - targets: ['172.17.0.1:8086']
     metrics_path: '/actuator/prometheus'
 
+  - job_name: 'inu-portal-dev'
+    static_configs:
+      - targets: ['172.17.0.1:8104']
+    metrics_path: '/actuator/prometheus'
+
   - job_name: 'uss-prod'
     static_configs:
       - targets: ['uss-server-prod:8081']
+    metrics_path: '/actuator/prometheus'
+
+  - job_name: 'moimi-dev'
+    static_configs:
+      - targets: ['inu-teamflow-dev:8081']
     metrics_path: '/actuator/prometheus'

@@ -21,6 +21,7 @@ services:
       - gravit-prod
       - gravit-dev
       - uss-prod
+      - inu-teamflow-dev
 
   grafana:
     image: grafana/grafana:latest
@@ -57,6 +58,9 @@ networks:
   uss-prod:
     external: true
     name: uss-prod
+  inu-teamflow-dev:
+    external: true
+    name: inu-teamflow-dev
 
 volumes:
   prometheus-data:
