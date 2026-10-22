@@ -21,3 +21,10 @@ datasources:
     access: proxy
     url: http://inu-teamflow-loki:3100
     editable: true
+
+  - name: Loki-unidorm
+    uid: unidorm-loki
+    type: loki
+    access: proxy
+    url: http://unidorm-loki:3100
+    editable: true
