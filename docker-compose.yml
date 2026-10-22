@@ -22,6 +22,8 @@ services:
       - gravit-dev
       - uss-prod
       - inu-teamflow
+      - unidorm-main
+      - unidorm-dev
 
   grafana:
     image: grafana/grafana:latest
@@ -46,6 +48,8 @@ services:
       - gravit-prod
       - gravit-dev
       - inu-teamflow
+      - unidorm-main
+      - unidorm-dev
 
 networks:
   monitoring:
@@ -62,6 +66,12 @@ networks:
   inu-teamflow:             # 모이미(moimi) 서비스 네트워크 (dev, prod, Loki 공용)
     external: true
     name: inu-teamflow
+  unidorm-main:
+    external: true
+    name: unidorm-network
+  unidorm-dev:
+    external: true
+    name: inu-network
 
 volumes:
   prometheus-data:
