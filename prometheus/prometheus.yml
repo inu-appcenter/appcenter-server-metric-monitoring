@@ -38,10 +38,10 @@ scrape_configs:
 
   - job_name: 'unidorm-main'
     static_configs:
-      - targets: ['unidorm-main:8056']
+      - targets: ['unidorm-main:8081']
     metrics_path: '/actuator/prometheus'
 
   - job_name: 'unidorm-dev'
     static_configs:
-      - targets: [ 'inu-dormitory-dev:8055' ]
+      - targets: [ 'inu-dormitory-dev:8081' ]
     metrics_path: '/actuator/prometheus'
