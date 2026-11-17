@@ -1,12 +1,14 @@
 scrape_configs:
+  # gravit은 actuator를 관리 포트 8081로 옮긴다. 앱 배포 전후 어느 쪽이든 수집이 끊기지 않게 전환 기간에는 8080과 8081을 함께 둔다.
+  # 운영, 개발 모두 8081이 UP이 되면 8080을 지운다.
   - job_name: 'gravit-prod'
     static_configs:
-      - targets: ['gravit-server-prod:8080']
+      - targets: ['gravit-server-prod:8080', 'gravit-server-prod:8081']
     metrics_path: '/actuator/prometheus'
 
   - job_name: 'gravit-dev'
     static_configs:
-      - targets: ['gravit-server-dev:8080']
+      - targets: ['gravit-server-dev:8080', 'gravit-server-dev:8081']
     metrics_path: '/actuator/prometheus'
 
   - job_name: 'inu-portal'

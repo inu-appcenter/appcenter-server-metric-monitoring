@@ -28,3 +28,18 @@ datasources:
     access: proxy
     url: http://unidorm-loki:3100
     editable: true
+
+  # Grafana가 prod_gravit-prod, dev_gravit-dev 네트워크에 조인해 있어 컨테이너 이름으로 조회한다.
+  - name: Loki-gravit-prod
+    uid: gravit-loki-prod
+    type: loki
+    access: proxy
+    url: http://gravit-loki-prod:3100
+    editable: true
+
+  - name: Loki-gravit-dev
+    uid: gravit-loki-dev
+    type: loki
+    access: proxy
+    url: http://gravit-loki-dev:3100
+    editable: true
