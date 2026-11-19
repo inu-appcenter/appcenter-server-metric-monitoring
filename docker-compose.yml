@@ -50,7 +50,7 @@ services:
       - gravit-dev
       - inu-teamflow
       - unidorm-main
-      - unidorm-
+      - unidorm-dev
       - ttok-ttok-prod
 
 networks:
