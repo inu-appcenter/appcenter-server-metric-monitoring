@@ -43,3 +43,10 @@ datasources:
     access: proxy
     url: http://gravit-loki-dev:3100
     editable: true
+
+  - name: Loki-ttok-ttok
+    uid: ttok-ttok-loki
+    type: loki
+    access: proxy
+    url: http://ttok-ttok-loki:3100
+    editable: true
