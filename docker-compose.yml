@@ -24,6 +24,7 @@ services:
       - inu-teamflow
       - unidorm-main
       - unidorm-dev
+      - ttok-ttok-prod
 
   grafana:
     image: grafana/grafana:latest
@@ -49,7 +50,8 @@ services:
       - gravit-dev
       - inu-teamflow
       - unidorm-main
-      - unidorm-dev
+      - unidorm-
+      - ttok-ttok-prod
 
 networks:
   monitoring:
@@ -72,6 +74,9 @@ networks:
   unidorm-dev:
     external: true
     name: inu-network
+  ttok-ttok-prod:           # 똑똑(ttok-ttok) 운영 서비스 네트워크
+    external: true
+    name: ttok-ttok-network
 
 volumes:
   prometheus-data:

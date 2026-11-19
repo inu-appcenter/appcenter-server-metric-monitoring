@@ -47,3 +47,8 @@ scrape_configs:
     static_configs:
       - targets: [ 'inu-dormitory-dev:8081' ]
     metrics_path: '/actuator/prometheus'
+
+  - job_name: 'ttok-ttok-prod'
+    static_configs:
+      - targets: ['ttok-ttok:8081']
+    metrics_path: '/actuator/prometheus'
